@@ -94,8 +94,7 @@ export const GlobalStyles = StyleSheet.create({
   topBarExpanded: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding: 20,
-    width: '320',
+    width: 370,
   },
   topBarTextBold: {
     color: colors.topBarTextBold,
@@ -154,7 +153,7 @@ export const GlobalStyles = StyleSheet.create({
     marginHorizontal: 5,
   },
   editContainer: {
-    width: '280',
+    width: '100%',
   },
   inputRow: {
     flexDirection: 'row',

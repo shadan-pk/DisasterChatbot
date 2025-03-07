@@ -11,6 +11,11 @@ type SignupScreenProps = {
 };
 
 const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [location, setLocation] = useState('');
+  const [nearestPoliceStation, setNearestPoliceStation] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,18 +34,24 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
     }
     setLoading(false);
   }
+
   return (
     <View style={GlobalStyles.container}>
       <Image source={require('../../assets/logo.png')} style={GlobalStyles.logo} />
       <Text style={GlobalStyles.title}>Sign Up</Text>
-      <TextInput style={GlobalStyles.input} placeholder="Email" value={email} onChangeText={setEmail} />
+      <TextInput style={GlobalStyles.input} placeholder="First Name" value={firstName} onChangeText={setFirstName} />
+      <TextInput style={GlobalStyles.input} placeholder="Last Name" value={lastName} onChangeText={setLastName} />
+      <TextInput style={GlobalStyles.input} placeholder="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} keyboardType="phone-pad" />
+      <TextInput style={GlobalStyles.input} placeholder="Location" value={location} onChangeText={setLocation} />
+      <TextInput style={GlobalStyles.input} placeholder="Nearest Police Station" value={nearestPoliceStation} onChangeText={setNearestPoliceStation} />
+      <TextInput style={GlobalStyles.input} placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
       <TextInput style={GlobalStyles.input} placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} />
       {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
         <>
-          <TouchableOpacity style={GlobalStyles.button} onPress={signUp} >
-            <Text style={GlobalStyles.buttonText}>Login</Text>
+          <TouchableOpacity style={GlobalStyles.button} onPress={signUp}>
+            <Text style={GlobalStyles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </>
       )}

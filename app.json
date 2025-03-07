@@ -10,7 +10,15 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        [
+          "expo-camera",
+          {
+            "cameraPermission": "Allow $(DisasterChatbot) to access your camera."
+          }
+        ]
+      ]
     },
     "ios": {
       "supportsTablet": true
@@ -23,6 +31,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-sqlite"
+    ]
   }
 }

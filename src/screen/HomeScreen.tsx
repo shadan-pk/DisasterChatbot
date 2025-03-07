@@ -14,11 +14,11 @@ interface HomeScreenProps {
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [firstName, setFirstName] = useState("Shadan");
-  const [lastName, setLastName] = useState("pk");
-  const [phoneNumber, setPhoneNumber] = useState("8086465649");
-  const [location, setLocation] = useState("Vettathur");
-  const [nearestPoliceStation, setNearestPoliceStation] = useState("Melattur Police Station");
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [location, setLocation] = useState();
+  const [nearestPoliceStation, setNearestPoliceStation] = useState();
 
   const handleSave = () => {
     setIsEditing(false);
@@ -126,14 +126,48 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       
       {/* Buttons Grid */}
       <ScrollView contentContainerStyle={GlobalStyles.buttonGrid}>
-        <Button icon="link" text="Offline Mode Help" />
-        <Button icon="lightbulb-o" text="Flashlight" />
-        <Button icon="clock-o" text="Alarm" />
-        <Button icon="map-marker" text="Share Live Location" />
-        <Button icon="phone" text="Emergency Contacts" />
-        <Button icon="question-circle" text="Survival Guidance" />
-        <Button icon="comments" text="Quick Messages" highlight="green" />
-        <Button icon="exclamation-triangle" text="SOS Alert" highlight="red" />
+        <Button 
+          icon="link" 
+          text="Offline Mode Help" 
+          onPress={() => navigation.navigate('OfflineHelp')} 
+        />
+        <Button 
+          icon="lightbulb-o" 
+          text="Flashlight" 
+          onPress={() => navigation.navigate('Flashlight')} 
+        />
+        <Button 
+          icon="clock-o" 
+          text="Alarm" 
+          onPress={() => navigation.navigate('Alarm')} 
+        />
+        <Button 
+          icon="map-marker" 
+          text="Share Live Location" 
+          onPress={() => navigation.navigate('LocationShare')} 
+        />
+        <Button 
+          icon="phone" 
+          text="Emergency Contacts" 
+          onPress={() => navigation.navigate('EmergencyContacts')} 
+        />
+        <Button 
+          icon="question-circle" 
+          text="Survival Guidance" 
+          onPress={() => navigation.navigate('SurvivalGuide')} 
+        />
+        <Button 
+          icon="comments" 
+          text="Quick Messages" 
+          highlight="green" 
+          onPress={() => navigation.navigate('QuickMessages')} 
+        />
+        <Button 
+          icon="exclamation-triangle" 
+          text="SOS Alert" 
+          highlight="red" 
+          onPress={() => navigation.navigate('SOSAlert')} 
+        />
       </ScrollView>
     </View>
   );
@@ -143,9 +177,10 @@ interface ButtonProps {
   icon: string;
   text: string;
   highlight?: "green" | "red";
+  onPress: () => void;  // Add this line
 }
 
-const Button: React.FC<ButtonProps> = ({ icon, text, highlight }) => {
+const Button: React.FC<ButtonProps> = ({ icon, text, highlight, onPress }) => {
   return (
     <TouchableOpacity
       style={[
@@ -156,6 +191,7 @@ const Button: React.FC<ButtonProps> = ({ icon, text, highlight }) => {
           ? GlobalStyles.buttonRed
           : GlobalStyles.buttonDefault
       ]}
+      onPress={onPress}  // Add this line
     >
       <Icon name={icon} size={30} color="white" style={GlobalStyles.buttonIcon} />
       <Text style={GlobalStyles.buttonText}>{text}</Text>

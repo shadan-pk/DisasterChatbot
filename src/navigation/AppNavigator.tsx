@@ -5,7 +5,7 @@ import SplashScreen from '../screen/SplashScreen';
 import LoginScreen from '../screen/LoginScreen';
 import SignupScreen from '../screen/SignupScreen';
 import HomeScreen from '../screen/HomeScreen';
-import ChatScreen from '../screen/ChatScreen';
+import OfflineHelpScreen from '../screen/offlineHelpScreen';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
@@ -15,7 +15,14 @@ export type RootStackParamList = {
   Login: undefined;
   Signup: undefined;
   Home: undefined;
-  Chat: undefined;
+  OfflineHelp: undefined;
+  Flashlight: undefined;
+  Alarm: undefined;
+  LocationShare: undefined;
+  EmergencyContacts: undefined;
+  SurvivalGuide: undefined;
+  QuickMessages: undefined;
+  SOSAlert: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -30,11 +37,18 @@ const AppNavigator: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
+      <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="OfflineHelp" component={OfflineHelpScreen} />
+        {/* <Stack.Screen name="Flashlight" component={FlashlightScreen} />
+        <Stack.Screen name="Alarm" component={AlarmScreen} />
+        <Stack.Screen name="LocationShare" component={LocationShareScreen} />
+        <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
+        <Stack.Screen name="SurvivalGuide" component={SurvivalGuideScreen} />
+        <Stack.Screen name="QuickMessages" component={QuickMessagesScreen} />
+        <Stack.Screen name="SOSAlert" component={SOSAlertScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
