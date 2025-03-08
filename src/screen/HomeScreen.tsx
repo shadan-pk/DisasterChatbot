@@ -7,6 +7,7 @@ import { signOut } from 'firebase/auth';
 import { doc, getDoc } from "firebase/firestore";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
+import { HomeScreenStyles } from '../styles/HomeScreenStyles';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -27,7 +28,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             setProfile({
               firstName: data.firstName,
               lastName: data.lastName,
-              location: data.location,
+              location: data.address,
             });
           }
         } catch (error) {
@@ -48,19 +49,28 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <View style={GlobalStyles.container}>
+    <View style={HomeScreenStyles.container}>
       {/* Top Bar */}
       <TouchableOpacity
-        style={GlobalStyles.topBar}
+        style={HomeScreenStyles.topBar}
         onPress={() => navigation.navigate('ProfileScreen')}
       >
-        <Text style={GlobalStyles.topBarText}>
-          {profile.firstName || "User"} {profile.lastName || ""}{"\n"}
+        <Text style={HomeScreenStyles.topBarText}>
+          {profile.firstName || "User"} {profile.lastName}
+        </Text>
+        <Text style={HomeScreenStyles.topBarText}>
           {profile.location || "No Location"}
         </Text>
+        {/* <Text style={HomeScreenStyles.topBarTextButton}>
+          {"Profile"}
+        </Text> */}
+        <TouchableOpacity style={HomeScreenStyles.logoutButton} onPress={handleLogout}>
+          <Text style={HomeScreenStyles.logoutButtonText}>Logout</Text>
+        </TouchableOpacity>
+
       </TouchableOpacity>
       
-      <ScrollView contentContainerStyle={GlobalStyles.buttonGrid}>
+      <ScrollView contentContainerStyle={HomeScreenStyles.buttonGrid}>
         <Button 
           icon="link" 
           text="Offline Mode Help" 
@@ -103,9 +113,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           highlight="red" 
           onPress={() => navigation.navigate('SOSAlert')} 
         />
-        <TouchableOpacity style={GlobalStyles.LogoutButton} onPress={handleLogout}>
-          <Text style={GlobalStyles.LogoutButtonText}>Logout</Text>
-        </TouchableOpacity>
+        
       </ScrollView>
     </View>
   );
@@ -121,17 +129,17 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ icon, text, highlight, onPress }) => (
   <TouchableOpacity
     style={[
-      GlobalStyles.button,
+      HomeScreenStyles.button,
       highlight === "green"
-        ? GlobalStyles.buttonGreen
+        ? HomeScreenStyles.buttonGreen
         : highlight === "red"
-        ? GlobalStyles.buttonRed
-        : GlobalStyles.buttonDefault
+        ? HomeScreenStyles.buttonRed
+        : HomeScreenStyles.buttonDefault
     ]}
     onPress={onPress}
   >
-    <Icon name={icon} size={30} color="white" style={GlobalStyles.buttonIcon} />
-    <Text style={GlobalStyles.buttonText}>{text}</Text>
+    <Icon name={icon} size={30} color="white" style={HomeScreenStyles.buttonIcon} />
+    <Text style={HomeScreenStyles.buttonText}>{text}</Text>
   </TouchableOpacity>
 );
 
