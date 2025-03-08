@@ -8,6 +8,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { HomeScreenStyles } from '../styles/HomeScreenStyles';
+import { useFocusEffect } from "@react-navigation/native";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -17,28 +18,32 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const [profile, setProfile] = useState<{ firstName?: string; lastName?: string; location?: string }>({});
   
   // Fetch user profile from Firestore using current UID
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const currentUser = FIREBASE_AUTH.currentUser;
-      if (currentUser) {
-        try {
-          const userDoc = await getDoc(doc(FIREBASE_DB, "users", currentUser.uid));
-          if (userDoc.exists()) {
-            const data = userDoc.data();
-            setProfile({
-              firstName: data.firstName,
-              lastName: data.lastName,
-              location: data.address,
-            });
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchProfile = async () => {
+        const currentUser = FIREBASE_AUTH.currentUser;
+        if (currentUser) {
+          try {
+            const userDoc = await getDoc(doc(FIREBASE_DB, "users", currentUser.uid));
+            if (userDoc.exists()) {
+              const data = userDoc.data();
+              setProfile({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                location: data.address,
+              });
+            }
+          } catch (error) {
+            console.error("Error fetching user profile:", error);
           }
-        } catch (error) {
-          console.error("Error fetching user profile:", error);
         }
-      }
-    };
-    fetchProfile();
-  }, []);
+      };
 
+      fetchProfile();
+    }, [])
+  );
+
+  // Handle user logout
   const handleLogout = async () => {
     try {
       await signOut(FIREBASE_AUTH);
@@ -48,6 +53,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     }
   };
 
+  // Render the Home screen
   return (
     <View style={HomeScreenStyles.container}>
       {/* Top Bar */}
@@ -56,7 +62,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         onPress={() => navigation.navigate('ProfileScreen')}
       >
         <Text style={HomeScreenStyles.topBarText}>
-          {profile.firstName || "User"} {profile.lastName}
+          {profile.firstName || "User"}
         </Text>
         <Text style={HomeScreenStyles.topBarText}>
           {profile.location || "No Location"}
@@ -67,9 +73,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <TouchableOpacity style={HomeScreenStyles.logoutButton} onPress={handleLogout}>
           <Text style={HomeScreenStyles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
-
       </TouchableOpacity>
       
+      {/* Button Grid */}
       <ScrollView contentContainerStyle={HomeScreenStyles.buttonGrid}>
         <Button 
           icon="link" 
@@ -119,6 +125,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   );
 };
 
+// Define styles for HomeScreen
 interface ButtonProps {
   icon: string;
   text: string;
@@ -126,6 +133,7 @@ interface ButtonProps {
   onPress: () => void;
 }
 
+// Define Button component
 const Button: React.FC<ButtonProps> = ({ icon, text, highlight, onPress }) => (
   <TouchableOpacity
     style={[

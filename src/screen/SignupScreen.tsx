@@ -130,6 +130,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your first name"
+            placeholderTextColor="#666"
             value={firstName}
             onChangeText={setFirstName}
           />
@@ -140,6 +141,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your last name"
+            placeholderTextColor="#666"
             value={lastName}
             onChangeText={setLastName}
           />
@@ -150,6 +152,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your email"
+            placeholderTextColor="#666"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -162,6 +165,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
+            placeholderTextColor="#666"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
@@ -173,6 +177,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your phone number"
+            placeholderTextColor="#666"
             value={phone}
             onChangeText={setPhone}
             keyboardType="phone-pad"
@@ -184,6 +189,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your address"
+            placeholderTextColor="#666"
             value={address}
             onChangeText={setAddress}
             multiline
@@ -213,11 +219,12 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#181818',
     padding: 20,
     paddingTop: 60,
   },
   title: {
+    color: '#fff',
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 30,
@@ -230,14 +237,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
     fontWeight: '500',
+    color: '#ddd',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: '#1f1f1f',
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#1f1f1f',
+    color:'#fff',
   },
   button: {
     backgroundColor: '#4285F4',

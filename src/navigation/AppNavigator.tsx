@@ -5,7 +5,8 @@ import SplashScreen from '../screen/SplashScreen';
 import LoginScreen from '../screen/LoginScreen';
 import SignupScreen from '../screen/SignupScreen';
 import HomeScreen from '../screen/HomeScreen';
-import ProfileScreen from '../screen/ProfileScreen';
+import ProfileScreen  from '../screen/ProfileScreen';
+import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
@@ -25,7 +26,9 @@ export type RootStackParamList = {
   QuickMessages: undefined;
   SOSAlert: undefined;
   ProfileScreen: undefined;
+  EditProfileScreen: undefined;
 };
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -45,6 +48,7 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="OfflineHelp" component={OfflineHelpScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         {/* <Stack.Screen name="Flashlight" component={FlashlightScreen} />
         <Stack.Screen name="Alarm" component={AlarmScreen} />
         <Stack.Screen name="LocationShare" component={LocationShareScreen} />

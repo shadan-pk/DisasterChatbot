@@ -4,6 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 import { collection, getDocs, doc, getDoc, DocumentData } from 'firebase/firestore';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig'; // Using your Firebase config
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
 
 // Define the user profile interface
 interface UserProfile extends DocumentData {
@@ -20,6 +22,8 @@ const ProfileScreen = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const navigation = useNavigation();
 
 // Add this function inside your ProfileScreen component
 const fetchUserProfile = async () => {
@@ -46,6 +50,7 @@ const fetchUserProfile = async () => {
         };
         
         setUserProfile(profile);
+        
       } else {
         console.log('No user document found for uid:', uid);
         throw new Error('User profile not found');
@@ -92,7 +97,8 @@ const fetchUserProfile = async () => {
       </View>
     );
   }
-
+  
+// Add the profile screen UI
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -138,17 +144,25 @@ const fetchUserProfile = async () => {
             label="Location" 
             value={userProfile?.address || 'Not provided'} 
           />
-          
-            <InfoItem 
+            {/* <InfoItem 
                 icon="business-outline" 
                 label="Police Station" 
                 value={userProfile?.policeStation || 'Not provided'}
-            />
-
+            /> */}
         </View>
 
-        <TouchableOpacity style={styles.editButton}>
+         {/* Add the Edit Profile and Go Back buttons */}
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={() => navigation.navigate('EditProfileScreen', { userProfile })}
+        >
           <Text style={styles.editButtonText}>Edit Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.goBackButton}
+          onPress={() => navigation.navigate('Home')}  // Changed from 'HomeScreen' to 'Home'
+        >
+          <Text style={styles.goBackButtonText}>Back to Home</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -176,13 +190,13 @@ const InfoItem: React.FC<InfoItemProps> = ({ icon, label, value }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#181818',
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#181818',
   },
   loadingText: {
     marginTop: 10,
@@ -194,7 +208,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#181818',
   },
   errorText: {
     marginTop: 10,
@@ -206,7 +220,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#181818',
     borderRadius: 8,
   },
   retryButtonText: {
@@ -216,11 +230,11 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 30,
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#181818',
     borderBottomWidth: 1,
-    borderBottomColor: '#ececec',
+    borderBottomColor:'#404040',
   },
   profileImage: {
     width: 120,
@@ -231,15 +245,15 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#fff',
   },
   email: {
     fontSize: 16,
-    color: '#666',
+    color: '#999',
     marginTop: 5,
   },
   infoSection: {
-    backgroundColor: 'white',
+    backgroundColor: '#252525',
     padding: 20,
     marginVertical: 10,
     borderRadius: 10,
@@ -254,13 +268,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 15,
-    color: '#333',
+    color: '#999',
   },
   infoItem: {
     flexDirection: 'row',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#ececec',
+    borderBottomColor: '#444',
   },
   infoContent: {
     flex: 1,
@@ -268,11 +282,11 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 14,
-    color: '#888',
+    color: '#666',
   },
   infoValue: {
     fontSize: 16,
-    color: '#333',
+    color: '#fff',
     fontWeight: '500',
     marginTop: 4,
   },
@@ -288,7 +302,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+  },
+  goBackButton: {
+    alignItems: 'center',
+  },
+  goBackButtonText: {
+    color:'#fff',
+    fontSize: 16,
+    fontWeight: '600',
   }
-});
+})
 
 export default ProfileScreen;

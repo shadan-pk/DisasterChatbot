@@ -28,24 +28,23 @@ export const GlobalStyles = StyleSheet.create({
     color: colors.topBarTextBold,
   },
   input: {
-    width: 300, // Fixed width
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#1f1f1f',
     borderRadius: 8,
-    padding: 10,
-    marginVertical: 10,
+    padding: 12,
     fontSize: 16,
-    backgroundColor: '#fff',
-    color: '#000',
+    backgroundColor: '#1f1f1f',
+    color:'#fff',
+    width: 300,
+    marginBottom: 20,
   },
   button: {
-    width: 300, // Fixed width
-    backgroundColor: colors.buttonDefault,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
+    backgroundColor: '#4285F4',
+    padding: 15,
     borderRadius: 8,
     alignItems: 'center',
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
   buttonText: {
     color: colors.buttonText,
@@ -88,7 +87,7 @@ export const GlobalStyles = StyleSheet.create({
     backgroundColor: colors.topBarBackground,
     padding: 22,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 100,
     width: '100%',
   },
   topBarExpanded: {
