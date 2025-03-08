@@ -5,6 +5,7 @@ import { RootStackParamList } from '../navigation/AppNavigator';
 // import { styles } from '../styles/styles';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Ionicons } from '@expo/vector-icons';
 
 type LoginScreenProps = {
   navigation: StackNavigationProp<RootStackParamList, 'Login'>;
@@ -14,6 +15,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const auth = FIREBASE_AUTH;
 
   const signIn = async () => {
@@ -45,14 +47,26 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           keyboardType="email-address"
           autoCapitalize="none"
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor='#666'
-          value={password}
-          secureTextEntry={true}
-          onChangeText={setPassword}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Password"
+            placeholderTextColor='#666'
+            value={password}
+            secureTextEntry={!showPassword}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Ionicons
+              name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+              size={24}
+              color="#666"
+            />
+          </TouchableOpacity>
+        </View>
       {loading ? (
             <ActivityIndicator size="large" color="#0000ff" />
           ) : (
@@ -122,6 +136,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textDecorationLine: 'underline',
     textAlign: 'center',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 300,
+    borderWidth: 1,
+    borderColor: '#1f1f1f',
+    borderRadius: 8,
+    backgroundColor: '#1f1f1f',
+    marginBottom: 20,
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 12,
+    fontSize: 16,
+    color: '#fff',
+  },
+  eyeButton: {
+    padding: 10,
   },
 });
 

@@ -8,6 +8,7 @@ import HomeScreen from '../screen/HomeScreen';
 import ProfileScreen  from '../screen/ProfileScreen';
 import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
+import ChatScreen from '../screen/ChatScreen';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
@@ -27,6 +28,7 @@ export type RootStackParamList = {
   SOSAlert: undefined;
   ProfileScreen: undefined;
   EditProfileScreen: undefined;
+  ChatScreen: undefined;
 };
 
 
@@ -49,6 +51,7 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen name="OfflineHelp" component={OfflineHelpScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
         {/* <Stack.Screen name="Flashlight" component={FlashlightScreen} />
         <Stack.Screen name="Alarm" component={AlarmScreen} />
         <Stack.Screen name="LocationShare" component={LocationShareScreen} />

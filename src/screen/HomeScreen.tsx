@@ -109,9 +109,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         />
         <Button 
           icon="comments" 
-          text="Quick Messages" 
+          text="Quick Chatbot" 
           highlight="green" 
-          onPress={() => navigation.navigate('QuickMessages')} 
+          onPress={() => navigation.navigate('ChatScreen')} 
         />
         <Button 
           icon="exclamation-triangle" 

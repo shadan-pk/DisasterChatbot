@@ -20,7 +20,7 @@ export const HomeScreenStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 35,
+    // marginTop: 35,
   },
   topBarText: {
     color: 'white',
