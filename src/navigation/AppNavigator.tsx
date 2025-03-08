@@ -8,7 +8,7 @@ import HomeScreen from '../screen/HomeScreen';
 import ProfileScreen  from '../screen/ProfileScreen';
 import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
-import ChatScreen from '../screen/ChatScreen';
+import ChatScreen from '../screen/ChatbotScreen/screens/ChatScreen';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
