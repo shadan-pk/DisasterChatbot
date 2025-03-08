@@ -2415,7 +2415,7 @@
   resolved "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@react-native-firebase/app@21.12.0":
+"@react-native-firebase/app@^21.12.0", "@react-native-firebase/app@21.12.0":
   version "21.12.0"
   resolved "https://registry.npmjs.org/@react-native-firebase/app/-/app-21.12.0.tgz"
   integrity sha512-zMaXtFnnxRU3aa43msPXv25mJUVKQtGwn0TBl4mcPnj4Dr3rz3QHXZtkk3OAj7Q5J7BoNnedjyAVU2HxEK0/Wg==
@@ -2428,6 +2428,11 @@
   integrity sha512-1z3NsdHv03fby49dEalHE4HRTqWA09d27TV6nLBKm27fdL7rIcD12Ymylb8Mdq+DNwHZOza7WwLdMIj4cqdmHQ==
   dependencies:
     plist "^3.1.0"
+
+"@react-native-firebase/firestore@^21.12.0":
+  version "21.12.0"
+  resolved "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-21.12.0.tgz"
+  integrity sha512-HOaCk8nntV+a1VoVjgjv7lIfR0uajGP7ZaQtEic2lEafaYuGr8plNmvIw+PLomSka8x+Nzs9zYYObjJ9QTs+aA==
 
 "@react-native/assets-registry@0.76.7":
   version "0.76.7"
