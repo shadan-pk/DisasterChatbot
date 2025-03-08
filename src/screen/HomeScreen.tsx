@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GlobalStyles } from "../styles/GlobalStyles";
-import { FIREBASE_AUTH } from '../../FirebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig';
 import { signOut } from 'firebase/auth';
+import { doc, getDoc } from "firebase/firestore";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 
@@ -12,18 +13,30 @@ interface HomeScreenProps {
 }
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [location, setLocation] = useState();
-  const [nearestPoliceStation, setNearestPoliceStation] = useState();
-
-  const handleSave = () => {
-    setIsEditing(false);
-    setIsExpanded(false);
-  };
+  const [profile, setProfile] = useState<{ firstName?: string; lastName?: string; location?: string }>({});
+  
+  // Fetch user profile from Firestore using current UID
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const currentUser = FIREBASE_AUTH.currentUser;
+      if (currentUser) {
+        try {
+          const userDoc = await getDoc(doc(FIREBASE_DB, "users", currentUser.uid));
+          if (userDoc.exists()) {
+            const data = userDoc.data();
+            setProfile({
+              firstName: data.firstName,
+              lastName: data.lastName,
+              location: data.location,
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user profile:", error);
+        }
+      }
+    };
+    fetchProfile();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -37,94 +50,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   return (
     <View style={GlobalStyles.container}>
       {/* Top Bar */}
-      <TouchableOpacity onPress={() => !isEditing && setIsExpanded(!isExpanded)}>
-        <View style={[GlobalStyles.topBar, isExpanded && GlobalStyles.topBarExpanded]}>
-          {isEditing ? (
-            <View style={GlobalStyles.editContainer}>
-              <View style={GlobalStyles.inputRow}>
-                <Text style={GlobalStyles.labelText}>First Name:</Text>
-                <TextInput
-                  style={GlobalStyles.Dropinput}
-                  value={firstName}
-                  onChangeText={setFirstName}
-                />
-              </View>
-              <View style={GlobalStyles.inputRow}>
-                <Text style={GlobalStyles.labelText}>Last Name:</Text>
-                <TextInput
-                  style={GlobalStyles.Dropinput}
-                  value={lastName}
-                  onChangeText={setLastName}
-                />
-              </View>
-              <View style={GlobalStyles.inputRow}>
-                <Text style={GlobalStyles.labelText}>Phone:</Text>
-                <TextInput
-                  style={GlobalStyles.Dropinput}
-                  value={phoneNumber}
-                  onChangeText={setPhoneNumber}
-                  keyboardType="phone-pad"
-                />
-              </View>
-              <View style={GlobalStyles.inputRow}>
-                <Text style={GlobalStyles.labelText}>Location:</Text>
-                <TextInput
-                  style={GlobalStyles.Dropinput}
-                  value={location}
-                  onChangeText={setLocation}
-                />
-              </View>
-              <View style={GlobalStyles.inputRow}>
-                <Text style={GlobalStyles.labelText}>Police Station:</Text>
-                <TextInput
-                  style={GlobalStyles.Dropinput}
-                  value={nearestPoliceStation}
-                  onChangeText={setNearestPoliceStation}
-                />
-              </View>
-              <TouchableOpacity 
-                style={GlobalStyles.saveButton} 
-                onPress={handleSave}
-              >
-                <Text style={GlobalStyles.saveButtonText}>Save</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <>
-              <Text style={GlobalStyles.topBarTextBold}>
-                {firstName}
-              </Text>
-              <Text style={GlobalStyles.topBarTextNormal}>
-                {location}
-                {/* {currentLocation || "Updating location..."} */}
-              </Text>
-              {isExpanded && (
-                <View style={GlobalStyles.expandedInfo}>
-                  <Text style={GlobalStyles.infoText}>Last Name: {lastName}</Text>
-                  <Text style={GlobalStyles.infoText}>Phone Number: {phoneNumber}</Text>
-                  <Text style={GlobalStyles.infoText}>Location: {location}</Text>
-                  <Text style={GlobalStyles.infoText}>Police Station: {nearestPoliceStation}</Text>
-                  <TouchableOpacity 
-                    style={GlobalStyles.editButton} 
-                    onPress={() => setIsEditing(true)}
-                  >
-                    <Text style={GlobalStyles.editButtonText}>Edit Profile</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity 
-                    style={GlobalStyles.LogoutButton} 
-                    onPress={handleLogout}
-                  >
-                    <Text style={GlobalStyles.LogoutButtonText}>Logout</Text>
-                  </TouchableOpacity>
-                  
-                </View>
-              )}
-            </>
-          )}
-        </View>
+      <TouchableOpacity
+        style={GlobalStyles.topBar}
+        onPress={() => navigation.navigate('ProfileScreen')}
+      >
+        <Text style={GlobalStyles.topBarText}>
+          {profile.firstName || "User"} {profile.lastName || ""}{"\n"}
+          {profile.location || "No Location"}
+        </Text>
       </TouchableOpacity>
       
-      {/* Buttons Grid */}
       <ScrollView contentContainerStyle={GlobalStyles.buttonGrid}>
         <Button 
           icon="link" 
@@ -168,6 +103,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           highlight="red" 
           onPress={() => navigation.navigate('SOSAlert')} 
         />
+        <TouchableOpacity style={GlobalStyles.LogoutButton} onPress={handleLogout}>
+          <Text style={GlobalStyles.LogoutButtonText}>Logout</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -177,26 +115,24 @@ interface ButtonProps {
   icon: string;
   text: string;
   highlight?: "green" | "red";
-  onPress: () => void;  // Add this line
+  onPress: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ icon, text, highlight, onPress }) => {
-  return (
-    <TouchableOpacity
-      style={[
-        GlobalStyles.button,
-        highlight === "green"
-          ? GlobalStyles.buttonGreen
-          : highlight === "red"
-          ? GlobalStyles.buttonRed
-          : GlobalStyles.buttonDefault
-      ]}
-      onPress={onPress}  // Add this line
-    >
-      <Icon name={icon} size={30} color="white" style={GlobalStyles.buttonIcon} />
-      <Text style={GlobalStyles.buttonText}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
+const Button: React.FC<ButtonProps> = ({ icon, text, highlight, onPress }) => (
+  <TouchableOpacity
+    style={[
+      GlobalStyles.button,
+      highlight === "green"
+        ? GlobalStyles.buttonGreen
+        : highlight === "red"
+        ? GlobalStyles.buttonRed
+        : GlobalStyles.buttonDefault
+    ]}
+    onPress={onPress}
+  >
+    <Icon name={icon} size={30} color="white" style={GlobalStyles.buttonIcon} />
+    <Text style={GlobalStyles.buttonText}>{text}</Text>
+  </TouchableOpacity>
+);
 
 export default HomeScreen;

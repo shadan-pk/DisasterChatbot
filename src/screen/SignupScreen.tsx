@@ -12,7 +12,7 @@ import {
   NativeSyntheticEvent,
   TextInputChangeEventData 
 } from 'react-native';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc,setDoc, doc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, AuthError } from 'firebase/auth';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig'; // Import your existing Firebase config
 
@@ -85,7 +85,8 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
       };
       
       // Store additional user data in Firestore
-      await addDoc(collection(FIREBASE_DB, "users"), userData);
+      // await addDoc(collection(FIREBASE_DB, "users"), userData);
+      await setDoc(doc(FIREBASE_DB, "users", userCredential.user.uid), userData);
       
       console.log("User registered with ID: ", userCredential.user.uid);
       
