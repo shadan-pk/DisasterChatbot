@@ -2,7 +2,11 @@
 .\src\SQLite
 # dependencies
 node_modules/
+
+# Firebase
 FirebaseConfig.ts
+FirebaseConfig.js
+
 # Expo
 .expo/
 dist/
