@@ -10,15 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "plugins": [
-        [
-          "expo-camera",
-          {
-            "cameraPermission": "Allow $(DisasterChatbot) to access your camera."
-          }
-        ]
-      ]
+      "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true
@@ -35,7 +27,21 @@
     },
     "plugins": [
       "expo-sqlite",
-      "expo-build-properties"
+      "expo-build-properties",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(DisasterChatbot) to access your camera."
+        }
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/firestore",
+      "react-native-gesture-handler",
+      "react-native-reanimated",
+      "react-native-safe-area-context",
+      "react-native-screens",
+      "react-native-vector-icons"
     ],
     "extra": {
       "eas": {
