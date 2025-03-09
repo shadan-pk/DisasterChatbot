@@ -27,13 +27,20 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sdnpk.DisasterChatbot"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-sqlite"
-    ]
+      "expo-sqlite",
+      "expo-build-properties"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "97ca8aa7-6e14-4022-8e62-f88893624922"
+      }
+    }
   }
 }

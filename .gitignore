@@ -3,10 +3,10 @@
 # dependencies
 node_modules/
 
-
+android
 # Firebase
-FirebaseConfig.ts
-FirebaseConfig.js
+src/FirebaseConfig.ts
+src/FirebaseConfig.js
 
 # Expo
 .expo/

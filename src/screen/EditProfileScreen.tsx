@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Alert, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { doc, updateDoc } from 'firebase/firestore';
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { Ionicons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -152,7 +152,7 @@ interface InputFieldProps {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
-  icon: string;
+  icon: keyof typeof Ionicons.glyphMap;
   multiline?: boolean;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
 }

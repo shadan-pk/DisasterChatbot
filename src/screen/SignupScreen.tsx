@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { collection, addDoc,setDoc, doc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, AuthError } from 'firebase/auth';
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig'; // Import your existing Firebase config
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig'; // Import your existing Firebase config
 
 // Navigation prop type - adjust based on your navigation setup
 type SignupScreenProps = {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GlobalStyles } from "../styles/GlobalStyles";
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig';
 import { signOut } from 'firebase/auth';
 import { doc, getDoc } from "firebase/firestore";
 import { StackNavigationProp } from '@react-navigation/stack';

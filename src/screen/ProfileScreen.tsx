@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, ActivityIndicator, TouchableOpacity, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { collection, getDocs, doc, getDoc, DocumentData } from 'firebase/firestore';
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../FirebaseConfig'; // Using your Firebase config
+import { FIREBASE_AUTH, FIREBASE_DB } from '../FirebaseConfig'; // Using your Firebase config
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 

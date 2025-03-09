@@ -9,8 +9,6 @@ import ProfileScreen  from '../screen/ProfileScreen';
 import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
 import ChatScreen from '../screen/ChatbotScreen/screens/ChatScreen';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
 // Define available screens and their parameters
 export type RootStackParamList = {
@@ -35,12 +33,6 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log('user',user);
-    });
-  }, []);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>

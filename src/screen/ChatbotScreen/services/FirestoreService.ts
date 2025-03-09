@@ -1,4 +1,4 @@
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../../../FirebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../../FirebaseConfig';
 import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { Message, EmergencyType, LocationData, UserData } from '../types';
 
