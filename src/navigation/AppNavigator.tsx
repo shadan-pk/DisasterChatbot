@@ -9,6 +9,8 @@ import ProfileScreen  from '../screen/ProfileScreen';
 import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
 import ChatScreen from '../screen/ChatbotScreen/screens/ChatScreen';
+import SOSAlert  from '../screen/SOSAlert';
+
 
 // Define available screens and their parameters
 export type RootStackParamList = {
@@ -44,6 +46,7 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen name="SOSAlert" component={SOSAlert} />
         {/* <Stack.Screen name="Flashlight" component={FlashlightScreen} />
         <Stack.Screen name="Alarm" component={AlarmScreen} />
         <Stack.Screen name="LocationShare" component={LocationShareScreen} />
