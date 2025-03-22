@@ -90,7 +90,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Button 
           icon="clock-o" 
           text="Alarm" 
-          onPress={() => navigation.navigate('Alarm')} 
+          onPress={() => navigation.navigate('AlertItem')} 
         />
         <Button 
           icon="map-marker" 
@@ -100,12 +100,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Button 
           icon="phone" 
           text="Emergency Contacts" 
-          onPress={() => navigation.navigate('EmergencyContacts')} 
+          onPress={() => navigation.navigate('SafeAreaNavigation')} 
         />
         <Button 
           icon="question-circle" 
           text="Survival Guidance" 
-          onPress={() => navigation.navigate('SurvivalGuide')} 
+          onPress={() => navigation.navigate('SurvivalGuidance')} 
         />
         <Button 
           icon="comments" 

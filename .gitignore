@@ -8,6 +8,7 @@ android
 src/FirebaseConfig.ts
 src/FirebaseConfig.js
 
+
 # Expo
 .expo/
 dist/
@@ -39,3 +40,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+#google api
+src/screen/ChatbotScreen/api/config.ts

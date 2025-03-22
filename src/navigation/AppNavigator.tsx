@@ -10,6 +10,12 @@ import EditProfileScreen from '../screen/EditProfileScreen';
 import OfflineHelpScreen from '../screen/offlineHelpScreen';
 import ChatScreen from '../screen/ChatbotScreen/screens/ChatScreen';
 import SOSAlert  from '../screen/SOSAlert';
+import SurvivalGuidance  from '../screen/SurvivalGuidance';
+import SafeAreaNavigation from '../screen/SafeArea/backup/SafeAreaNavigation';
+import AlertItem from '../screen/AlertScreen/screens/AlertScreen';
+// import AlertItem from '../screen/AlertScreen/backup/AlertsScreen';
+
+
 
 
 // Define available screens and their parameters
@@ -23,12 +29,14 @@ export type RootStackParamList = {
   Alarm: undefined;
   LocationShare: undefined;
   EmergencyContacts: undefined;
-  SurvivalGuide: undefined;
+  SurvivalGuidance: undefined;
   QuickMessages: undefined;
   SOSAlert: undefined;
   ProfileScreen: undefined;
   EditProfileScreen: undefined;
   ChatScreen: undefined;
+  SafeAreaNavigation: undefined;
+  AlertItem: undefined;
 };
 
 
@@ -47,13 +55,9 @@ const AppNavigator: React.FC = () => {
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="SOSAlert" component={SOSAlert} />
-        {/* <Stack.Screen name="Flashlight" component={FlashlightScreen} />
-        <Stack.Screen name="Alarm" component={AlarmScreen} />
-        <Stack.Screen name="LocationShare" component={LocationShareScreen} />
-        <Stack.Screen name="EmergencyContacts" component={EmergencyContactsScreen} />
-        <Stack.Screen name="SurvivalGuide" component={SurvivalGuideScreen} />
-        <Stack.Screen name="QuickMessages" component={QuickMessagesScreen} />
-        <Stack.Screen name="SOSAlert" component={SOSAlertScreen} /> */}
+        <Stack.Screen name="SurvivalGuidance" component={SurvivalGuidance} />
+        <Stack.Screen name="SafeAreaNavigation" component={SafeAreaNavigation} />
+        <Stack.Screen name="AlertItem" component={AlertItem} />
       </Stack.Navigator>
     </NavigationContainer>
   );
