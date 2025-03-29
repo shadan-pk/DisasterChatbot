@@ -9,6 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { HomeScreenStyles } from '../styles/HomeScreenStyles';
 import { useFocusEffect } from "@react-navigation/native";
+// import WeatherDisplay from "./WeatherInfo/WeatherDisplay";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -74,6 +75,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <Text style={HomeScreenStyles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
       </TouchableOpacity>
+
+      {/* Weather Display */}
+      {/* <WeatherDisplay /> */}
       
       {/* Button Grid */}
       <ScrollView contentContainerStyle={HomeScreenStyles.buttonGrid}>
@@ -90,7 +94,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Button 
           icon="clock-o" 
           text="Alarm" 
-          onPress={() => navigation.navigate('Alarm')} 
+          onPress={() => navigation.navigate('AlertItem')} 
         />
         <Button 
           icon="map-marker" 
@@ -100,12 +104,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <Button 
           icon="phone" 
           text="Emergency Contacts" 
-          onPress={() => navigation.navigate('EmergencyContacts')} 
+          onPress={() => navigation.navigate('SafeAreaNavigation')} 
         />
         <Button 
           icon="question-circle" 
           text="Survival Guidance" 
-          onPress={() => navigation.navigate('SurvivalGuide')} 
+          onPress={() => navigation.navigate('SurvivalGuidance')} 
         />
         <Button 
           icon="comments" 

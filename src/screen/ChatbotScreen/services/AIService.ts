@@ -1,8 +1,6 @@
 import { Message } from '../types';
-
-// Your API configuration
-const API_KEY = 'YOUR_API_KEY'; // Replace with your actual API key
-const API_URL = 'YOUR_MODEL_ENDPOINT'; // Replace with your model's endpoint URL
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { API_CONFIG } from '../api/config'; // Import the config
 
 export class AIService {
   static async sendMessage(
@@ -11,28 +9,21 @@ export class AIService {
     isEmergency: boolean = false
   ): Promise<string | null> {
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          messages: [
-            // You can include context about the user here
-            { role: 'system', content: `You are chatting with ${userName}. ${isEmergency ? 'This is an EMERGENCY situation. Be concise and helpful.' : 'Be helpful and friendly.'}` },
-            { role: 'user', content: userMessage },
-          ],
-          max_tokens: 500,
-        }),
-      });
+      // Initialize the Google Generative AI client
+      const genAI = new GoogleGenerativeAI(API_CONFIG.GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ model: API_CONFIG.MODEL_ID });
 
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
+      // Create system message for context
+      const systemPrompt = `You are chatting with ${userName}. ${isEmergency ? 'This is an EMERGENCY situation. Be concise and helpful.' : 'Be helpful and friendly.'}`;
+      
+      // Combine system prompt and user message
+      const prompt = `${systemPrompt}\n\n${userMessage}`;
 
-      const data = await response.json();
-      return data.choices[0].message.content;
+      // Generate content using the Gemini API
+      const result = await model.generateContent(prompt);
+      
+      // Extract the response text
+      return result.response.text();
     } catch (error) {
       console.error('Error sending message to AI:', error);
       return null;
