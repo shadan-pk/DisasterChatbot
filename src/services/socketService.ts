@@ -45,7 +45,7 @@ import * as Device from 'expo-device';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
-const SOCKET_URL = 'http://192.168.23.249:3001'; // Local server URL
+const SOCKET_URL = 'http://192.168.1.9:3001'; // Local server URL
 
 // Configure notifications
 Notifications.setNotificationHandler({

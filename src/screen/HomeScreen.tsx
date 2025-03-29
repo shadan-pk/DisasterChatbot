@@ -9,6 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { HomeScreenStyles } from '../styles/HomeScreenStyles';
 import { useFocusEffect } from "@react-navigation/native";
+// import WeatherDisplay from "./WeatherInfo/WeatherDisplay";
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -74,6 +75,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <Text style={HomeScreenStyles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
       </TouchableOpacity>
+
+      {/* Weather Display */}
+      {/* <WeatherDisplay /> */}
       
       {/* Button Grid */}
       <ScrollView contentContainerStyle={HomeScreenStyles.buttonGrid}>

@@ -43,3 +43,4 @@ yarn-error.*
 
 #google api
 src/screen/ChatbotScreen/api/config.ts
+src/screen/WeatherInfo/api/config.ts

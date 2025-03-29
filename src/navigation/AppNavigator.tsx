@@ -13,6 +13,7 @@ import SOSAlert  from '../screen/SOSAlert';
 import SurvivalGuidance  from '../screen/SurvivalGuidance';
 import SafeAreaNavigation from '../screen/SafeArea/backup/SafeAreaNavigation';
 import AlertItem from '../screen/AlertScreen/screens/AlertScreen';
+// import WeatherDisplay from '../screen/WeatherInfo/WeatherDisplay';
 // import AlertItem from '../screen/AlertScreen/backup/AlertsScreen';
 
 
@@ -37,6 +38,7 @@ export type RootStackParamList = {
   ChatScreen: undefined;
   SafeAreaNavigation: undefined;
   AlertItem: undefined;
+  // WeatherDisplay: { weatherData: any };
 };
 
 
